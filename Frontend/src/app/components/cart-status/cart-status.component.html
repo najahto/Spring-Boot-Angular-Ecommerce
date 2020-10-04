@@ -1,0 +1,17 @@
+<ul class="nav-add">
+    <li class="cart">
+        <div class="js-cart-animate">
+            <i class="seoicon-basket"></i>
+            <span class="cart-count">{{totalQuantity}}</span>
+        </div>
+        <div class="cart-popup-wrap">
+            <div class="popup-cart">
+                <h4 *ngIf="totalQuantity ==0 || totalprice == 0 ; else elseBlock" class="title-cart" style="padding-bottom: 30px;">No products in the cart!</h4>
+                <ng-template #elseBlock><h4 class="title-cart" style="padding-bottom: 30px;">SubTotal= {{totalprice | currency:'USD'}}</h4></ng-template>
+                <a routerLink="/cart-details" class="btn btn-small btn--dark">
+                    <span class="text">view all catalog</span>
+                </a>
+            </div>
+        </div>
+    </li>
+</ul>

@@ -1,0 +1,420 @@
+<div class="container">
+    <form [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()">
+        <div class="row medium-padding120">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="billing-details contact-form">
+                    <!-- shipping address form Group-->
+                    <div formGroupName="shippingAddress" class="billing-details contact-form">
+                        <h2 class="h1 billing-details-title">Shipping Address</h2>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label class="input-title c-dark">Country
+                                    <abbr class="required" title="required">*</abbr></label>
+                                <select formControlName="country" (change)="getStates('shippingAddress')" class="nice-select">
+                                    <option data-display="Choose country">Choose country</option>
+                                    <option *ngFor="let country of countries" [ngValue]="country">{{country.name}}</option>
+                                   
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label for="shipping_street" class="input-title c-dark">Street
+                                    <abbr class="required" title="required">*</abbr></label>
+                                <input formControlName="street" class="input-standard-grey" name="shipping_street"
+                                    id="shipping_street" placeholder="" value="" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label class="input-title c-dark">State
+                                    <abbr class="required" title="required">*</abbr></label>
+                                <select formControlName="state" class="nice-select">
+                                    <option data-display="Choose State">Choose State</option>
+                                    <option *ngFor="let state of shippingAddressStates" [ngValue]="state">{{state.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="shipping_city" class="input-title c-dark">City
+                                    <abbr class="required" title="required">*</abbr></label>
+
+                                <input formControlName="city" class="input-standard-grey" name="shipping_city"
+                                    id="shipping_city" placeholder="" value="" type="text">
+
+                            </div>
+                            <div class="col-lg-6">
+
+                                <label for="shipping_zipCode" class="input-title c-dark">Zip Code
+                                    <abbr class="required" title="required">*</abbr></label>
+
+                                <input formControlName="zipCode" class="input-standard-grey" name="shipping_zipCode"
+                                    id="shipping_zipCode" placeholder="" value="" type="text">
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="remember-wrap">
+                                    <div class="checkbox gray">
+                                        <input (change)="copyShppingAddress($event)" id="billing_shipping"
+                                            type="checkbox">
+                                        <label for="billing_shipping">Billing Address same as Shipping address ?</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div formGroupName="billingAddress" class="billing-details contact-form">
+                    <h2 class="h1 billing-details-title">Billing Address</h2>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label class="input-title c-dark">Country
+                                <abbr class="required" title="required">*</abbr></label>
+                            <select formControlName="country" (change)="getStates('billingAddress')" class="nice-select">
+                                <option data-display="Choose country">Choose country</option>
+                                <option *ngFor="let country of countries" [ngValue]="country">{{country.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label for="billing_street" class="input-title c-dark">Street
+                                <abbr class="required" title="required">*</abbr></label>
+                            <input formControlName="street" class="input-standard-grey" name="billing_street"
+                                id="billing_street" placeholder="" value="" type="text">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label class="input-title c-dark">State
+                                <abbr class="required" title="required">*</abbr></label>
+                            <select formControlName="state"  class="nice-select">
+                                <option data-display="Choose State">Choose State</option>
+                                <option *ngFor="let state of billingAddressStates" [ngValue]="state">{{state.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="billing_city" class="input-title c-dark">City
+                                <abbr class="required" title="required">*</abbr></label>
+
+                            <input formControlName="city" class="input-standard-grey" name="billing_city"
+                                id="billing_city" placeholder="" value="" type="text">
+
+                        </div>
+                        <div class="col-lg-6">
+
+                            <label for="billing_zipCode" class="input-title c-dark">Zip Code
+                                <abbr class="required" title="required">*</abbr></label>
+
+                            <input formControlName="zipCode" class="input-standard-grey" name="billing_zipCode"
+                                id="billing_zipCode" placeholder="" value="" type="text">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="billing-details contact-form">
+                    <!-- Customer form Group-->
+                    <div formGroupName="customer">
+                        <h2 class="h1 billing-details-title">Customer</h2>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label for="first_name" class="input-title c-dark">First Name
+                                    <abbr class="required" title="required">*</abbr></label>
+
+                                <input formControlName="firstName" class="input-standard-grey" name="billing_first_name"
+                                    id="first_name" placeholder="" value="" type="text">
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label for="last_Name" class="input-title c-dark">Last Name
+                                    <abbr class="required" title="required">*</abbr></label>
+
+                                <input formControlName="lasttName" class="input-standard-grey" name="billing_first_name"
+                                    id="last_Name" placeholder="" value="" type="text">
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label for="billing_email" class="input-title c-dark">Email Address
+                                    <abbr class="required" title="required">*</abbr></label>
+                                <input formControlName="email" class="input-standard-grey" name="billing_email"
+                                    id="billing_email" placeholder="" value="" type="text">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-medium btn--light-green btn-hover-shadow">
+                        <span class="text">Place Order</span>
+                        <span class="semicircle"></span>
+                    </button>
+
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div formGroupName="creditCard" class="billing-details contact-form">
+                    <h2 class="h1 billing-details-title">Credit Card </h2>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label class="input-title c-dark">Card Type
+                                <abbr class="required" title="required">*</abbr></label>
+                            <select formControlName="cardType" class="nice-select">
+                                <option data-display="Choose State">Choose Card Type</option>
+                                <option>Visa</option>
+                                <option>MasterCard</option>
+                            </select>
+
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="nameOnCard" class="input-title c-dark">Name on Card
+                                <abbr class="required" title="required">*</abbr></label>
+                            <input formControlName="nameOnCard" class="input-standard-grey" id="nameOnCard"
+                                placeholder="" value="" type="text">
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label for="cardNumber" class="input-title c-dark">Card Number
+                                <abbr class="required" title="required">*</abbr></label>
+                            <input formControlName="cardNumber" class="input-standard-grey" id="cardNumber"
+                                placeholder="" value="" type="text">
+
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="securityCode" class="input-title c-dark">Security Code
+                                <abbr class="required" title="required">*</abbr></label>
+                            <input formControlName="securityCode" class="input-standard-grey" id="securityCode"
+                                placeholder="" value="" type="text">
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label class="input-title c-dark">Expiration Mounth
+                                <abbr class="required" title="required">*</abbr></label>
+                            <select formControlName="expirationMounth" class="nice-select">
+                                <option data-display="Choose State">Choose Expiration Mounth</option>
+                                <option *ngFor="let month of creditCardMounths">{{month}}</option>
+                            </select>
+
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="input-title c-dark">Expiration Year
+                                <abbr class="required" title="required">*</abbr></label>
+                            <select formControlName="expirationYear" (change)="handleMonthsAndYears()" class="nice-select">
+                                <option data-display="Choose State">Choose Expiration Mounth</option>
+                                <option *ngFor="let year of creditCardYears">{{year}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- Order -->
+
+
+<!-- <div class="container-fluid">
+    <div class="row medium-padding120 bg-border-color">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="order">
+                        <h2 class="h1 order-title">Your Order</h2>
+                        <form action="#" method="post" class="cart-main">
+                            <table class="shop_table cart">
+                                <thead class="cart-product-wrap-title-main">
+                                    <tr>
+                                        <th class="product-thumbnail">Product</th>
+                                        <th class="product-quantity">Quantity</th>
+                                        <th class="product-subtotal">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr class="cart_item">
+
+                                        <td class="product-thumbnail">
+
+                                            <div class="cart-product__item">
+                                                <div class="cart-product-content">
+                                                    <h5 class="cart-product-title">Search Marketing</h5>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td class="product-quantity">
+
+                                            <div class="quantity">
+                                                x 1
+                                            </div>
+
+                                        </td>
+
+                                        <td class="product-subtotal">
+                                            <h5 class="total amount">$58.00</h5>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr class="cart_item">
+
+                                        <td class="product-thumbnail">
+
+                                            <div class="cart-product__item">
+
+                                                <div class="cart-product-content">
+                                                    <h5 class="cart-product-title">SEO Community</h5>
+                                                </div>
+                                            </div>
+                                        </td>
+
+
+                                        <td class="product-quantity">
+
+                                            <div class="quantity">
+                                                x 2
+                                            </div>
+
+                                        </td>
+
+                                        <td class="product-subtotal">
+                                            <h5 class="total amount">$33.98</h5>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr class="cart_item">
+
+
+                                        <td class="product-thumbnail">
+
+                                            <div class="cart-product__item">
+
+                                                <div class="cart-product-content">
+                                                    <h5 class="cart-product-title">Web Analytics</h5>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td class="product-quantity">
+
+                                            <div class="quantity">
+                                                x 1
+                                            </div>
+
+                                        </td>
+
+                                        <td class="product-subtotal">
+                                            <h5 class="total amount">$8.99</h5>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr class="cart_item subtotal">
+
+                                        <td class="product-thumbnail">
+
+
+                                            <div class="cart-product-content">
+                                                <h5 class="cart-product-title"> Subtotal:</h5>
+                                            </div>
+
+
+                                        </td>
+
+                                        <td class="product-quantity">
+
+                                        </td>
+
+                                        <td class="product-subtotal">
+                                            <h5 class="total amount">$100.97</h5>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cart_item total">
+
+                                        <td class="product-thumbnail">
+
+
+                                            <div class="cart-product-content">
+                                                <h5 class="cart-product-title">Total:</h5>
+                                            </div>
+
+
+                                        </td>
+
+                                        <td class="product-quantity">
+
+                                        </td>
+
+                                        <td class="product-subtotal">
+                                            <h5 class="total amount">$100.97</h5>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                            <div class="cheque">
+
+                                <div class="cheque-content">
+                                    <h5 class="cheque-content-title">Cheque Payment</h5>
+                                    <p class="cheque-content-subtitle">Please send your cheque to Store Name, Store
+                                        Street,
+                                        Store Town, Store State / County, Store Postcode.
+                                    </p>
+                                </div>
+
+                                <div class="logos">
+                                    <a href="#" class="logos-item pay-pal">
+                                        <img loading="lazy" src="assets/img/pay-pal.png" alt="PayPal">
+                                    </a>
+                                    <a href="#" class="logos-item">
+                                        <img loading="lazy" src="assets/img/visa.png" alt="Visa">
+                                    </a>
+                                    <a href="#" class="logos-item">
+                                        <img loading="lazy" src="assets/img/mastercard.png" alt="MasterCard">
+                                    </a>
+                                    <a href="#" class="logos-item">
+                                        <img loading="lazy" src="assets/img/discover.png" alt="DISCOVER">
+                                    </a>
+                                    <a href="#" class="logos-item">
+                                        <img loading="lazy" src="assets/img/amex.png" alt="Amex">
+                                    </a>
+
+                                    <div class="btn btn-medium btn--light-green btn-hover-shadow">
+                                        <span class="text">Place Order</span>
+                                        <span class="semicircle"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div> -->

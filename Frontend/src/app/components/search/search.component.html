@@ -1,0 +1,5 @@
+<input #myInput type="text" class="input-standard-grey" placeholder="Search" (keyup.enter)="doSearch(myInput.value)" >
+<button (click)="doSearch(myInput.value)" class="btn btn-medium btn--breez btn-hover-shadow">
+    <span class="text">Search</span>
+    <span class="semicircle--right"></span>
+</button>

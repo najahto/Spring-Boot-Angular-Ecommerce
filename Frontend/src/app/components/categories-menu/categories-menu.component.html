@@ -1,0 +1,8 @@
+<nav class="menu">
+    <ul class="primary-menu-menu">
+        <li *ngFor="let category of categories" class="menu-item-has-children">
+            <a routerLink="/category/{{category.id}}" routerLinkActive="">{{category.name}}</a>
+         
+        </li>
+    </ul>
+</nav>

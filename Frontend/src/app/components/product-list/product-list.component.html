@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="row ">
+        <app-categories-menu></app-categories-menu>
+        <div class="books-grid">
+            <div class="row mb30">
+                <div *ngFor="let product of products" class="col-lg-4 col-md-4 col-sm-6 col-xs-12" id="books">
+                    <div class="books-item">
+                        <a routerLink="/products/{{product.id}}">
+                            <div class="books-item-thumb">
+                                <img src="{{product.imageUrl}}" alt="book">
+                                <div class="overlay overlay-books"></div>
+                            </div>
+                        </a>
+
+                        <div class="books-item-info">
+                            <a routerLink="/products/{{product.id}}">
+                                <h5 class="books-title">{{ product.name }}</h5>
+                            </a>
+                            <div class="books-price">{{ product.unitPrice | currency:'USD' }}</div>
+                        </div>
+
+                        <button (click)="addToCart(product)" class="btn btn-small btn--dark add">
+                            <span class="text">Add to Cart</span>
+                            <i class="seoicon-commerce"></i>
+                        </button>
+
+                    </div>
+                </div>
+
+            </div>
+            <div *ngIf="products?.length == 0" class="alert alert-info align-center" id="result-lert" role="alert">
+                <strong>No products found !</strong>
+            </div>
+            <div class="row pb120">
+
+                <div class="col-md-9">
+
+                    <!-- <nav class="navigation align-center">
+
+                        <a href="#" class="page-numbers bg-border-color current"><span>1</span></a>
+                        <a href="#" class="page-numbers bg-border-color"><span>2</span></a>
+                        <a href="#" class="page-numbers bg-border-color"><span>3</span></a>
+                        <a href="#" class="page-numbers bg-border-color"><span>4</span></a>
+                        <a href="#" class="page-numbers bg-border-color"><span>5</span></a>
+
+                        <div class="btn-prev">
+                            <a href="#" class="page-numbers bg-border-color"><span> < </span></a>
+                        </div>
+                        <div class="btn-next">
+                            <a href="#" class="page-numbers bg-border-color"><span> > </span></a>
+                        </div>
+        
+                    </nav>   -->
+                    <ngb-pagination [(page)]="pageNumber" [(pageSize)]="size" [(collectionSize)]="totalElements"
+                        [maxSize]="5" [boundaryLinks]="true" (pageChange)="listProducts()" >
+                    </ngb-pagination>
+                </div>
+
+                <div class="col-md-3 mt-2" id="dropdown-size">
+                    <span class="mr-2">Page Size</span>
+                    <select (change)="updatePageSize($event.target.value)" class="browser-default custom-select">
+                        <option>5 </option>
+                        <option selected="true">10</option>
+                        <option>20 </option>
+                        <option>30</option>
+                        <option>40</option>
+                        <option>50</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
